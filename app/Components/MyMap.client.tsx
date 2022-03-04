@@ -16,7 +16,7 @@ export const links: LinksFunction = () => {
     { rel: "stylesheet", href: mapStylesUrl },
     {
       rel: "stylesheet",
-      href: "https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@[VERSION]/dist/L.Control.Locate.min.css",
+      href: "https://cdn.jsdelivr.net/npm/leaflet.locatecontrol/dist/L.Control.Locate.min.css",
     },
   ];
 };
@@ -28,6 +28,7 @@ function LocationMarkers() {
     click(e) {
       markers.push(e.latlng);
       setMarkers((prevValue) => [...prevValue, e.latlng]);
+      console.log(e.latlng)
     },
   })
 
@@ -36,8 +37,11 @@ function LocationMarkers() {
       {markers.map((marker, i) => (
         
         <Marker key={i}  position={marker}>
-          <Popup>
+          <Popup className="new-popup" >
             <Link to="/map/new">Add this spot to the map</Link>
+            <div>
+            With these coordinates: <span/> {`latitude: ${marker.lat} longitude: ${marker.lng}`}
+            </div>
           </Popup>
           </Marker>
         

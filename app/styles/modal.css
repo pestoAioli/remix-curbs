@@ -1,0 +1,16 @@
+.modal {
+  margin-left: 50vw;
+  margin-right: 10vw;
+  background: none;
+}
+
+.dialog-text {
+  height: 45vh;
+  margin-top: 20vh;
+  border-radius: 6px;
+  background-image: radial-gradient(circle,
+      #ADF7B6 10%,
+      #FFEE93 35%,
+      #FFC09F 100%);
+  mix-blend-mode: multiply;
+}
