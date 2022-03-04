@@ -9,9 +9,16 @@ import type { LinksFunction } from "@remix-run/react/routeModules";
 import mapStylesUrl from "app/styles/map.css";
 import React from "react";
 import { useState } from "react";
-
+import { Link } from "remix";
+ 
 export const links: LinksFunction = () => {
-  return [{ rel: "stylesheet", href: mapStylesUrl }];
+  return [
+    { rel: "stylesheet", href: mapStylesUrl },
+    {
+      rel: "stylesheet",
+      href: "https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@[VERSION]/dist/L.Control.Locate.min.css",
+    },
+  ];
 };
 
 function LocationMarkers() {
@@ -22,12 +29,18 @@ function LocationMarkers() {
       markers.push(e.latlng);
       setMarkers((prevValue) => [...prevValue, e.latlng]);
     },
-  });
+  })
 
   return (
     <React.Fragment>
-      {markers.map((marker) => (
-        <Marker position={marker}></Marker>
+      {markers.map((marker, i) => (
+        
+        <Marker key={i}  position={marker}>
+          <Popup>
+            <Link to="/map/new">Add this spot to the map</Link>
+          </Popup>
+          </Marker>
+        
       ))}
     </React.Fragment>
   );
@@ -37,7 +50,9 @@ export default function MyMap({ data }) {
   return (
     <MapContainer center={[41.39553339782492, 2.197925161370089]} zoom={12}>
       <TileLayer url="https://{s}.tile.thunderforest.com/landscape/{z}/{x}/{y}.png?apikey=01aeaf06bca449cf9887843c3c62492e" />
-      <LocationMarkers></LocationMarkers>
+      <Link to="">
+      <LocationMarkers ></LocationMarkers>
+      </Link>
       {data.map((coords) => (
         <Marker position={[coords.lat, coords.lon]} key={coords.id}>
           <Popup maxHeight={300}>
