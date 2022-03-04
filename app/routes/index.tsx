@@ -1,45 +1,34 @@
-import { Links } from "remix";
-import { ClientOnly } from "remix-utils";
-import MyMap from "~/Components/MyMap.client";
-import Navbar from "~/Components/NavBar";
-
-import type { LoaderFunction } from "remix";
-import { useLoaderData } from "remix";
-import { db } from "~/utils/db.server";
-
-export let loader: LoaderFunction = async () => {
-  const kurbs = await db.curbs.findMany();
-  return kurbs;
-};
-
 import type { LinksFunction } from "remix";
-
+import { Link } from "remix";
 import stylesUrl from "~/styles/index.css";
 
 export const links: LinksFunction = () => {
   return [
     {
       rel: "stylesheet",
-      href: "https://unpkg.com/leaflet@1.7.1/dist/leaflet.css",
-    },
-    {
-      rel: "stylesheet",
-      href: stylesUrl,
-    },
+      href: stylesUrl
+    }
   ];
 };
 
-export default function Index() {
-  let data = useLoaderData();
+export default function IndexRoute() {
   return (
-    <>
-    <div>
-      <Links />
-      <Navbar></Navbar>
-      <ClientOnly fallback={<p>Loading...</p>}>
-        <MyMap data={data} />
-      </ClientOnly>
+    <div className="container">
+      <div className="content">
+        <h1>C</h1>
+        <h1>U</h1>
+        <h1>R</h1>
+        <h1>B</h1>
+        <h1>S</h1>
+        <nav>
+          <div>
+            <button className="enter">
+              <Link to="map">Enter</Link>
+              </button>
+           </div>
+        </nav>
       </div>
-    </>
+    </div>
   );
 }
+

@@ -1,0 +1,28 @@
+.nav-bar {
+  margin-top: 0px;
+  width: 99.6vw;
+}
+
+.curbs {
+  display: flex;
+  justify-content: space-around;
+  font-family: Wingdings;
+  margin-right: 5vw;
+}
+
+.button {
+  display: flex;
+  border: 1px solid #000000;
+  box-sizing: border-box;
+  border-radius: 5px;
+  height: 25px;
+  left: 17px;
+  right: 16px;
+  font-family: Wingdings;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 28px;
+  line-height: 20px;
+  margin-top: 3vh;
+}
+
