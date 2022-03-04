@@ -26,7 +26,7 @@ export const action: ActionFunction = async ({ request }) => {
 export default function NewSpotRoute() {
   return (
     <DialogOverlay isOpen={true} >
-      <DialogContent>
+      <DialogContent aria-label="Submit Form">
     <div>
       <form method="post">
         <div>
@@ -36,12 +36,12 @@ export default function NewSpotRoute() {
         </div>
         <div>
           <label>
-            Description: <input type="text" name="name" />
+            Description: <input type="text" name="description" />
           </label>
         </div>
         <div>
           <label >
-            Address: 
+            Address: <input type="text" name="address" />
           </label>
         </div>
         <div>
