@@ -1,32 +1,45 @@
+import { Links } from "remix";
+import { ClientOnly } from "remix-utils";
+import MyMap from "~/Components/MyMap.client";
+import Navbar from "~/Components/NavBar";
+
+import type { LoaderFunction } from "remix";
+import { useLoaderData } from "remix";
+import { db } from "~/utils/db.server";
+
+export let loader: LoaderFunction = async () => {
+  const kurbs = await db.curbs.findMany();
+  return kurbs;
+};
+
+import type { LinksFunction } from "remix";
+
+import stylesUrl from "~/styles/index.css";
+
+export const links: LinksFunction = () => {
+  return [
+    {
+      rel: "stylesheet",
+      href: "https://unpkg.com/leaflet@1.7.1/dist/leaflet.css",
+    },
+    {
+      rel: "stylesheet",
+      href: stylesUrl,
+    },
+  ];
+};
+
 export default function Index() {
+  let data = useLoaderData();
   return (
-    <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.4" }}>
-      <h1>Welcome to Remix</h1>
-      <ul>
-        <li>
-          <a
-            target="_blank"
-            href="https://remix.run/tutorials/blog"
-            rel="noreferrer"
-          >
-            15m Quickstart Blog Tutorial
-          </a>
-        </li>
-        <li>
-          <a
-            target="_blank"
-            href="https://remix.run/tutorials/jokes"
-            rel="noreferrer"
-          >
-            Deep Dive Jokes App Tutorial
-          </a>
-        </li>
-        <li>
-          <a target="_blank" href="https://remix.run/docs" rel="noreferrer">
-            Remix Docs
-          </a>
-        </li>
-      </ul>
-    </div>
+    <>
+    <div>
+      <Links />
+      <Navbar></Navbar>
+      <ClientOnly fallback={<p>Loading...</p>}>
+        <MyMap data={data} />
+      </ClientOnly>
+      </div>
+    </>
   );
 }

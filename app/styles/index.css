@@ -1,0 +1,21 @@
+.leaflet-container{
+  width: 100vw;
+  height: 100vh;
+}
+body{
+  margin: auto;
+}
+
+.nav-bar{
+  background-color: #e9d0ff;
+  margin-top: 0px;
+  width: 99.6vw;
+  border: 3px solid #cccccc;
+}
+
+.curbs{
+  display: flex;
+  justify-content: flex-end;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  margin-right: 5vw;
+}
