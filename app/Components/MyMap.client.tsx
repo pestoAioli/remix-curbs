@@ -4,19 +4,20 @@ import {
   Marker,
   Popup,
   useMapEvents,
+  MapConsumer,
 } from "react-leaflet";
 import type { LinksFunction } from "@remix-run/react/routeModules";
 import mapStylesUrl from "app/styles/map.css";
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "remix";
- 
+import useGeolocation from "react-hook-geolocation";
 export const links: LinksFunction = () => {
   return [
     { rel: "stylesheet", href: mapStylesUrl },
     {
       rel: "stylesheet",
-      href: "https://cdn.jsdelivr.net/npm/leaflet.locatecontrol/dist/L.Control.Locate.min.css",
+      href: "https://unpkg.com/leaflet-geosearch@3.0.0/dist/geosearch.css",
     },
   ];
 };
@@ -28,35 +29,56 @@ function LocationMarkers() {
     click(e) {
       markers.push(e.latlng);
       setMarkers((prevValue) => [...prevValue, e.latlng]);
-      console.log(e.latlng)
+      console.log(e.latlng);
     },
-  })
-
+  });
   return (
     <React.Fragment>
       {markers.map((marker, i) => (
-        
-        <Marker key={i}  position={marker}>
-          <Popup className="new-popup" >
-            <Link to="/map/new">Add this spot to the map</Link>
+        <Marker key={i} position={marker}>
+          <Popup className="new-popup">
+            <Link to="/map/new">
+              <h2>Add this spot to the map</h2>
+            </Link>
             <div>
-            With these coordinates: <span/> {`lat: ${marker.lat} lng: ${marker.lng}`}
+              With these coordinates: <span />{" "}
+              {`lat: ${marker.lat} lng: ${marker.lng}`}
             </div>
           </Popup>
-          </Marker>
-        
+        </Marker>
       ))}
     </React.Fragment>
   );
 }
+const lat = async () => {
+  await navigator.geolocation.getCurrentPosition((position) => {
+    console.log(position.coords.latitude);
+  });
+};
+
+const long = async () => {
+  await navigator.geolocation.getCurrentPosition((position) => {
+    return position.coords.longitude;
+  });
+};
 
 export default function MyMap({ data }) {
+  const geolocation = async () => {
+    const poo = await useGeolocation();
+    console.log(poo.latitude)
+    return poo;
+  };
   return (
-    <MapContainer center={[41.39553339782492, 2.197925161370089]} zoom={12}>
+    <MapContainer center={[41.395396239486615, 2.1976269809442392]} zoom={12}>
+      <MapConsumer>
+        {(map) => {
+          map.locate({setView: true, maxZoom: 14})
+          return null
+        }}
+      </MapConsumer>
       <TileLayer url="https://{s}.tile.thunderforest.com/landscape/{z}/{x}/{y}.png?apikey=01aeaf06bca449cf9887843c3c62492e" />
-      <Link to="">
-      <LocationMarkers ></LocationMarkers>
-      </Link>
+      <LocationMarkers></LocationMarkers>
+      {console.log(geolocation())}
       {data.map((coords) => (
         <Marker position={[coords.lat, coords.lon]} key={coords.id}>
           <Popup maxHeight={300}>

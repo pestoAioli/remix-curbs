@@ -15,7 +15,8 @@ export let loader: LoaderFunction = async () => {
 import type { LinksFunction } from "remix";
 
 import stylesUrl from "~/styles/index.css";
-import navbarStylesUrl from "app/styles/nav-bar.css"
+import navbarStylesUrl from "app/styles/nav-bar.css";
+
 
 
 export const links: LinksFunction = () => {
@@ -35,8 +36,9 @@ export const links: LinksFunction = () => {
   ];
 };
 
-export default function Index() {
+export default function Map() {
   let data = useLoaderData();
+
   return (
     <>
     <div>
@@ -44,7 +46,7 @@ export default function Index() {
       <Outlet/>
       <Navbar></Navbar>
       <ClientOnly fallback={<p>Loading...</p>}>
-        <MyMap data={data} />
+        <MyMap data={data}/>
       </ClientOnly>
       </div>
     </>
