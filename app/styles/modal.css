@@ -12,5 +12,27 @@
       #ADF7B6 10%,
       #FFEE93 35%,
       #FFC09F 100%);
-  mix-blend-mode: multiply;
+
+}
+
+.form-box {
+  margin-left: 7vw;
+  margin-right: 20vw;
+  padding: 5px 50px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 3vh;
+}
+
+.buttinz{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 1vh;
 }

@@ -1,5 +1,4 @@
 import { ActionFunction, Link } from "remix";
-import { redirect } from "remix";
 import { DialogOverlay, DialogContent } from "@reach/dialog";
 import { db } from "~/utils/db.server";
 import dialogStylesUrl from "@reach/dialog/styles.css";
@@ -17,10 +16,12 @@ export const action: ActionFunction = async ({ request }) => {
   const form = await request.formData();
   const name = form.get("name");
   const description = form.get("description");
+  const lat = form.get("lat").toString();
+  const lon = form.get("lng").toString();
   if (typeof name !== "string" || typeof description !== "string") {
     throw new Error(`Form not submitted correctly.`);
   }
-  const fields = { name, description };
+  const fields = { name, description, lat, lon };
 
   const spot = await db.curbs.create({ data: fields });
 
@@ -29,10 +30,10 @@ export const action: ActionFunction = async ({ request }) => {
 
 export default function NewSpotRoute() {
   return (
-    <DialogOverlay  className="modal" isOpen={true} dangerouslyBypassFocusLock onDismiss={}>
+    <DialogOverlay  className="modal" isOpen={true} dangerouslyBypassFocusLock >
       <DialogContent  className="dialog-text" aria-label="Submit Form">
-    <div>
-      <form method="post">
+    <div className="form-box">
+      <form method="post" className="form">
         <div>
           <label>
             Name: <input type="text" name="name" />{" "}
@@ -45,15 +46,15 @@ export default function NewSpotRoute() {
         </div>
         <div>
           <label >
-            lat: <input type="text" name="lat" />
+            lat: <input type="text" step="any" name="lat" />
           </label>
         </div>
         <div>
           <label >
-            lng: <input type="text" name="lng" />
+            lng: <input type="text" step="any" name="lng" />
           </label>
         </div>
-        <div>
+        <div className="buttinz">
         <button type="submit" className="button">
             Add
           </button>

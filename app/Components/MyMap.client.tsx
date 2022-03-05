@@ -40,7 +40,7 @@ function LocationMarkers() {
           <Popup className="new-popup" >
             <Link to="/map/new">Add this spot to the map</Link>
             <div>
-            With these coordinates: <span/> {`latitude: ${marker.lat} longitude: ${marker.lng}`}
+            With these coordinates: <span/> {`lat: ${marker.lat} lng: ${marker.lng}`}
             </div>
           </Popup>
           </Marker>
