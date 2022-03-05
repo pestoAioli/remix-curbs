@@ -35,6 +35,8 @@ export const action: ActionFunction = async ({ request }) => {
 };
 
 export default function NewSpotRoute() {
+
+  
   return (
     <DialogOverlay className="modal" isOpen={true} dangerouslyBypassFocusLock>
       <DialogContent className="dialog-text" aria-label="Submit Form">

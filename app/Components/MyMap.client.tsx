@@ -11,7 +11,7 @@ import mapStylesUrl from "app/styles/map.css";
 import React from "react";
 import { useState, useEffect } from "react";
 import { Link } from "remix";
-import useGeolocation from "react-hook-geolocation";
+
 export const links: LinksFunction = () => {
   return [
     { rel: "stylesheet", href: mapStylesUrl },
@@ -21,7 +21,6 @@ export const links: LinksFunction = () => {
     },
   ];
 };
-
 function LocationMarkers() {
   const [markers, setMarkers] = useState([]);
 
@@ -50,35 +49,17 @@ function LocationMarkers() {
     </React.Fragment>
   );
 }
-const lat = async () => {
-  await navigator.geolocation.getCurrentPosition((position) => {
-    console.log(position.coords.latitude);
-  });
-};
-
-const long = async () => {
-  await navigator.geolocation.getCurrentPosition((position) => {
-    return position.coords.longitude;
-  });
-};
-
 export default function MyMap({ data }) {
-  const geolocation = async () => {
-    const poo = await useGeolocation();
-    console.log(poo.latitude)
-    return poo;
-  };
   return (
     <MapContainer center={[41.395396239486615, 2.1976269809442392]} zoom={12}>
       <MapConsumer>
         {(map) => {
-          map.locate({setView: true, maxZoom: 14})
+          map.locate({setView: true, maxZoom: 20, watch: true, enableHighAccuracy: true})
           return null
         }}
       </MapConsumer>
       <TileLayer url="https://{s}.tile.thunderforest.com/landscape/{z}/{x}/{y}.png?apikey=01aeaf06bca449cf9887843c3c62492e" />
       <LocationMarkers></LocationMarkers>
-      {console.log(geolocation())}
       {data.map((coords) => (
         <Marker position={[coords.lat, coords.lon]} key={coords.id}>
           <Popup maxHeight={300}>
