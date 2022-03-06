@@ -51,23 +51,23 @@ export default function NewSpotRoute({request}) {
       <DialogContent className="dialog-text" aria-label="Submit Form">
         <div className="form-box">
           <form method="post" className="form">
-            <div>
+            <div className="input">
               <label>
                 Name: <input type="text" name="name" />
               </label>
             </div>
-            <div>
+            <div className="input">
               <label>
                 Description: <input type="text" name="description" />
               </label>
             </div>
-            <div>
+            <div className="input">
               <label>
                 lat:{" "}
                 <input type="text" step="any" name="lat" {...register("lat")} />
               </label>
             </div>
-            <div>
+            <div className="input">
               <label>
                 lng:{" "}
                 <input type="text" step="any" name="lng" {...register("lng")} />

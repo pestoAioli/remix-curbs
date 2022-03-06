@@ -9,7 +9,7 @@ import type { LinksFunction } from "@remix-run/react/routeModules";
 import mapStylesUrl from "app/styles/map.css";
 import { useState, useEffect, useRef } from "react";
 import { Link } from "remix";
-import L, { latLng } from "leaflet";
+import L, { latLng, LatLngExpression } from "leaflet";
 export const links: LinksFunction = () => {
   return [
     { rel: "stylesheet", href: mapStylesUrl },
@@ -23,16 +23,17 @@ function LocationMarkers() {
   const [markers, setMarkers] = useState([]);
 
   const map = useMapEvents({
-    click(e) {
+    dblclick(e) {
       markers.push(e.latlng);
       setMarkers((prevValue) => [...prevValue, e.latlng]);
-      map.setView(e.latlng)
+      map.setView(e.latlng);
+      
     },
   });
   return (
     <>
       {markers.map((marker, i) => (
-        <Marker key={i} position={marker} draggable={true}>
+        <Marker key={i} position={marker} draggable={true} >
           <Popup className="new-popup">
             <Link to="/map/new">
               <h2>Add this spot to the map</h2>
@@ -48,34 +49,33 @@ function LocationMarkers() {
   );
 }
 function MyComponent() {
-  const map = useMapEvents({
-  
-  })
+  const map = useMapEvents({});
 }
 
 export default function MyMap({ data }) {
   const [map, setMap] = useState(null);
-const mapRef = useRef();
+  const mapRef = useRef();
   //TODO:set center to be current location or newly added spot
-
   return (
     <MapContainer
       center={[41.395396239486615, 2.1976269809442392]}
       zoom={12}
       whenCreated={(map) => {
-        setMap(map);
+        map.doubleClickZoom.disable();
         map.locate({
           setView: true,
           maxZoom: 16,
+          enableHighAccuracy: true,
         });
-        map.on("locationfound", (e) =>
+        map.on("locationfound", (e) => {
+          setMap(map);
           L.circleMarker(e.latlng, {
             radius: 80,
             stroke: true,
             color: "#ADF7B6",
-            fill: false,
-          }).addTo(map)
-        );
+            fillColor: "#ADF7B6",
+          }).addTo(map);
+        });
         return null;
       }}
     >
