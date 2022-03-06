@@ -4,6 +4,7 @@ import { db } from "~/utils/db.server";
 import dialogStylesUrl from "@reach/dialog/styles.css";
 import modalStylesUrl from "app/styles/modal.css";
 import { LinksFunction } from "@remix-run/react/routeModules";
+import { useForm } from "react-hook-form";
 
 export const links: LinksFunction = () => {
   return [
@@ -34,8 +35,13 @@ export const action: ActionFunction = async ({ request }) => {
   return spot;
 };
 
-export default function NewSpotRoute() {
-
+export default function NewSpotRoute({position}) {
+  const { register } = useForm({
+    defaultValues: {
+    lat: "hi",
+    lng: "bye"
+    }
+    })
   
   return (
     <DialogOverlay className="modal" isOpen={true} dangerouslyBypassFocusLock>
@@ -54,12 +60,12 @@ export default function NewSpotRoute() {
             </div>
             <div>
               <label>
-                lat: <input type="text" step="any" name="lat"/>
+                lat: <input type="text" step="any" name="lat" {...register("lat")}/>
               </label>
             </div>
             <div>
               <label>
-                lng: <input type="text" step="any" name="lng" />
+                lng: <input type="text" step="any" name="lng" {...register("lng")} />
               </label>
             </div>
             <div className="buttinz">

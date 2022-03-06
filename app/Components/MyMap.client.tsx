@@ -5,13 +5,15 @@ import {
   Popup,
   useMapEvents,
   MapConsumer,
+  Pane,
 } from "react-leaflet";
 import type { LinksFunction } from "@remix-run/react/routeModules";
 import mapStylesUrl from "app/styles/map.css";
 import React from "react";
 import { useState, useEffect } from "react";
 import { Link } from "remix";
-
+import { circleMarker } from "leaflet";
+import L from "leaflet";
 export const links: LinksFunction = () => {
   return [
     { rel: "stylesheet", href: mapStylesUrl },
@@ -51,11 +53,26 @@ function LocationMarkers() {
 }
 export default function MyMap({ data }) {
   return (
-    <MapContainer center={[41.395396239486615, 2.1976269809442392]} zoom={12}>
+    <MapContainer center={[61.395396239486615, 2.1976269809442392]} zoom={12}>
       <MapConsumer>
         {(map) => {
-          map.locate({setView: true, maxZoom: 20, watch: true, enableHighAccuracy: true})
-          return null
+          map
+            .flyTo([41.395396239486615, 2.1976269809442392])
+            .locate({
+              setView: true,
+              maxZoom: 16,
+              watch: true,
+              enableHighAccuracy: true,
+            });
+          map.on("locationfound", (e) =>
+            L.circleMarker(e.latlng, {
+              radius: 80,
+              stroke: true,
+              color: "#ADF7B6",
+              fillColor: "#ADF7B6",
+            }).addTo(map)
+          );
+          return null;
         }}
       </MapConsumer>
       <TileLayer url="https://{s}.tile.thunderforest.com/landscape/{z}/{x}/{y}.png?apikey=01aeaf06bca449cf9887843c3c62492e" />
