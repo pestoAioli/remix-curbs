@@ -1,4 +1,5 @@
-import { Links, LiveReload, Outlet, Scripts, ScrollRestoration } from "remix";
+import { Links, LiveReload, Outlet, Scripts, ScrollRestoration, ErrorBoundaryComponent } from "remix";
+import MyMap from "./Components/MyMap.client";
 
 function Document({
   children,
@@ -33,3 +34,23 @@ export default function App() {
     </Document>
   );
 }
+
+export const ErrorBoundary: ErrorBoundaryComponent = ({ error }) => {
+  return (
+    <html>
+      <head>
+        <title>Oh no!</title>
+        <Links />
+      </head>
+      <body>
+        <div className="error">
+      <h1> Woopsie!!!! apparently, whatever you just tried to do, is not okay ;-( Please go back or refresh the page </h1>
+       <h2>For developers sake: {error.message} </h2>
+        </div>
+        <Scripts />
+      </body>
+    </html>
+  );
+  
+  
+};

@@ -1,4 +1,4 @@
-import { Links, Outlet } from "remix";
+import { Links, Outlet, ErrorBoundaryComponent } from "remix";
 import { ClientOnly } from "remix-utils";
 import MyMap from "~/Components/MyMap.client";
 import Navbar from "~/Components/NavBar";

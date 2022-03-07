@@ -4,12 +4,15 @@ import {
   Marker,
   Popup,
   useMapEvents,
+  useMap,
 } from "react-leaflet";
 import type { LinksFunction } from "@remix-run/react/routeModules";
 import mapStylesUrl from "app/styles/map.css";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "remix";
-import L, { latLng, LatLngExpression } from "leaflet";
+import L, { icon } from "leaflet";
+import { SearchControl, OpenStreetMapProvider } from "leaflet-geosearch";
+import "leaflet/dist/leaflet.css";
 export const links: LinksFunction = () => {
   return [
     { rel: "stylesheet", href: mapStylesUrl },
@@ -19,9 +22,8 @@ export const links: LinksFunction = () => {
     },
   ];
 };
-function LocationMarkers({setCoords}) {
+function LocationMarkers({ setCoords }) {
   const [markers, setMarkers] = useState([]);
-
 
   const map = useMapEvents({
     dblclick(e) {
@@ -29,7 +31,6 @@ function LocationMarkers({setCoords}) {
       setMarkers((prevValue) => [...prevValue, e.latlng]);
       setCoords(e.latlng);
       map.setView(e.latlng);
-      
     },
   });
   return (
@@ -38,7 +39,7 @@ function LocationMarkers({setCoords}) {
         <Marker key={i} position={marker} draggable={true} >
           <Popup className="new-popup">
             <Link to="/map/new">
-              <h2>Add this spot to the map</h2>
+              <h1>Add this spot to the map!</h1>
             </Link>
           </Popup>
         </Marker>
@@ -49,12 +50,22 @@ function LocationMarkers({setCoords}) {
 
 export default function MyMap({ data, setCoords }) {
   const [map, setMap] = useState(null);
-  //TODO:set center to be current location or newly added spot
+
+  const provider = new OpenStreetMapProvider();
+
+  const searchControl = SearchControl({
+    provider
+  });
+
   return (
     <MapContainer
       center={[41.395396239486615, 2.1976269809442392]}
       zoom={12}
+      zoomControl={false}
+      fadeAnimation={true}
+      zoomAnimation={true}
       whenCreated={(map) => {
+        map.addControl(searchControl);
         map.doubleClickZoom.disable();
         map.locate({
           setView: true,
@@ -77,7 +88,7 @@ export default function MyMap({ data, setCoords }) {
       <LocationMarkers setCoords={setCoords}></LocationMarkers>
       {data.map((coords) => (
         <Marker position={[coords.lat, coords.lon]} key={coords.id}>
-          <Popup maxHeight={500} >
+          <Popup maxHeight={500}>
             <h1>{coords.name}</h1>
             <h3>{coords.description}</h3>
             <h2>
@@ -87,7 +98,8 @@ export default function MyMap({ data, setCoords }) {
                 Get directions
               </a>
             </h2>
-            <img style={{maxWidth: "50vw", overflow: "scroll"}}
+            <img
+              style={{ maxWidth: "50vw", overflow: "hidden" }}
               src={`${coords.image_path}`}
               alt=""
             />

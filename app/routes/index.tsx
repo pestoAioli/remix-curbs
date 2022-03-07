@@ -27,6 +27,9 @@ export default function IndexRoute() {
               <Link to="map">Enter</Link>
             </button>
           </div>
+          <div className="how-to" >
+
+          </div>
         </nav>
       </div>
     </div>

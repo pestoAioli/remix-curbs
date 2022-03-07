@@ -1,13 +1,19 @@
-import { ActionFunction, Link, redirect, useOutletContext } from "remix";
+import {
+  ActionFunction,
+  ErrorBoundaryComponent,
+  Link,
+  Links,
+  Scripts,
+  redirect,
+  useOutletContext,
+  Outlet,
+} from "remix";
 import { DialogOverlay, DialogContent } from "@reach/dialog";
 import { db } from "~/utils/db.server";
 import dialogStylesUrl from "@reach/dialog/styles.css";
 import modalStylesUrl from "app/styles/modal.css";
 import { LinksFunction } from "@remix-run/react/routeModules";
 import { useForm } from "react-hook-form";
-import { ContextType } from "react";
-import { LatLngExpression } from "leaflet";
-
 export const links: LinksFunction = () => {
   return [
     { rel: "stylesheet", href: dialogStylesUrl },
@@ -24,13 +30,11 @@ export const action: ActionFunction = async ({ request }) => {
   const description = form.get("description");
   const lat = form.get("lat").toString();
   const lon = form.get("lng").toString();
-  if (typeof name !== "string" || typeof description !== "string") {
+  if (
+    typeof name !== "string" ||
+    typeof description !== "string"
+  ) {
     throw new Error(`Form not submitted correctly.`);
-  }
-  if (lat.includes(" ") || lon.includes(" ")) {
-    throw new Error(
-      `Please make sure there are no spaces in the coordinates before submitting`
-    );
   }
   const fields = { name, description, lat, lon };
 
@@ -40,12 +44,12 @@ export const action: ActionFunction = async ({ request }) => {
 };
 
 interface coords {
-  lat: string,
-  lng: string,
+  lat: string;
+  lng: string;
 }
 
 export default function NewSpotRoute({ request }) {
-  const  coords: coords = useOutletContext();
+  const coords: coords = useOutletContext();
   const { register } = useForm({
     defaultValues: {
       lat: coords.lat,
@@ -69,12 +73,22 @@ export default function NewSpotRoute({ request }) {
             </div>
             <div className="input">
               <label>
-                <input type="hidden" step="any" name="lat" {...register("lat")} />
+                <input
+                  type="hidden"
+                  step="any"
+                  name="lat"
+                  {...register("lat")}
+                />
               </label>
             </div>
             <div className="input">
               <label>
-                <input type="hidden" step="any" name="lng" {...register("lng")} />
+                <input
+                  type="hidden"
+                  step="any"
+                  name="lng"
+                  {...register("lng")}
+                />
               </label>
             </div>
             <div className="buttinz">
@@ -91,3 +105,4 @@ export default function NewSpotRoute({ request }) {
     </DialogOverlay>
   );
 }
+
