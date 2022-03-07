@@ -19,13 +19,15 @@ export const links: LinksFunction = () => {
     },
   ];
 };
-function LocationMarkers() {
+function LocationMarkers({setCoords}) {
   const [markers, setMarkers] = useState([]);
+
 
   const map = useMapEvents({
     dblclick(e) {
       markers.push(e.latlng);
       setMarkers((prevValue) => [...prevValue, e.latlng]);
+      setCoords(e.latlng);
       map.setView(e.latlng);
       
     },
@@ -38,23 +40,15 @@ function LocationMarkers() {
             <Link to="/map/new">
               <h2>Add this spot to the map</h2>
             </Link>
-            <div>
-              With these coordinates: <span />{" "}
-              {`lat: ${marker.lat} lng: ${marker.lng}`}
-            </div>
           </Popup>
         </Marker>
       ))}
     </>
   );
 }
-function MyComponent() {
-  const map = useMapEvents({});
-}
 
-export default function MyMap({ data }) {
+export default function MyMap({ data, setCoords }) {
   const [map, setMap] = useState(null);
-  const mapRef = useRef();
   //TODO:set center to be current location or newly added spot
   return (
     <MapContainer
@@ -80,10 +74,10 @@ export default function MyMap({ data }) {
       }}
     >
       <TileLayer url="https://{s}.tile.thunderforest.com/landscape/{z}/{x}/{y}.png?apikey=01aeaf06bca449cf9887843c3c62492e" />
-      <LocationMarkers></LocationMarkers>
+      <LocationMarkers setCoords={setCoords}></LocationMarkers>
       {data.map((coords) => (
         <Marker position={[coords.lat, coords.lon]} key={coords.id}>
-          <Popup maxHeight={300}>
+          <Popup maxHeight={500} >
             <h1>{coords.name}</h1>
             <h3>{coords.description}</h3>
             <h2>
@@ -93,10 +87,8 @@ export default function MyMap({ data }) {
                 Get directions
               </a>
             </h2>
-            <img
-              src={
-                "https://image.shutterstock.com/image-photo/picture-beautiful-view-birds-260nw-1836263689.jpg"
-              }
+            <img style={{maxWidth: "50vw", overflow: "scroll"}}
+              src={`${coords.image_path}`}
               alt=""
             />
           </Popup>

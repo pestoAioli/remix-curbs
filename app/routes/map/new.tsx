@@ -1,11 +1,12 @@
-import { ActionFunction, Link, redirect } from "remix";
+import { ActionFunction, Link, redirect, useOutletContext } from "remix";
 import { DialogOverlay, DialogContent } from "@reach/dialog";
 import { db } from "~/utils/db.server";
 import dialogStylesUrl from "@reach/dialog/styles.css";
 import modalStylesUrl from "app/styles/modal.css";
 import { LinksFunction } from "@remix-run/react/routeModules";
 import { useForm } from "react-hook-form";
-import { redirectBack } from "remix-utils";
+import { ContextType } from "react";
+import { LatLngExpression } from "leaflet";
 
 export const links: LinksFunction = () => {
   return [
@@ -38,14 +39,19 @@ export const action: ActionFunction = async ({ request }) => {
   return redirect("/map");
 };
 
-export default function NewSpotRoute({request}) {
+interface coords {
+  lat: string,
+  lng: string,
+}
+
+export default function NewSpotRoute({ request }) {
+  const  coords: coords = useOutletContext();
   const { register } = useForm({
     defaultValues: {
-      lat: "hi",
-      lng: "bye",
+      lat: coords.lat,
+      lng: coords.lng,
     },
   });
-
   return (
     <DialogOverlay className="modal" isOpen={true} dangerouslyBypassFocusLock>
       <DialogContent className="dialog-text" aria-label="Submit Form">
@@ -63,14 +69,12 @@ export default function NewSpotRoute({request}) {
             </div>
             <div className="input">
               <label>
-                lat:{" "}
-                <input type="text" step="any" name="lat" {...register("lat")} />
+                <input type="hidden" step="any" name="lat" {...register("lat")} />
               </label>
             </div>
             <div className="input">
               <label>
-                lng:{" "}
-                <input type="text" step="any" name="lng" {...register("lng")} />
+                <input type="hidden" step="any" name="lng" {...register("lng")} />
               </label>
             </div>
             <div className="buttinz">
