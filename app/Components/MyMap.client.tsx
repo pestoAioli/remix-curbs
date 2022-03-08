@@ -54,9 +54,9 @@ export default function MyMap({ data, setCoords }) {
   const provider = new OpenStreetMapProvider();
 
   const searchControl = SearchControl({
-    provider
+    style: 'button',
+    provider,
   });
-
   return (
     <MapContainer
       center={[41.395396239486615, 2.1976269809442392]}

@@ -5,7 +5,6 @@
 
 .curbs {
   display: flex;
-  border: solid #00000091 1px;
   box-shadow: 3px;
   justify-content: space-around;
   font-family: Wingdings;

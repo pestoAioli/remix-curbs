@@ -16,6 +16,7 @@ import type { LinksFunction } from "remix";
 
 import stylesUrl from "~/styles/index.css";
 import navbarStylesUrl from "app/styles/nav-bar.css";
+import mapStylesUrl from "app/styles/map.css";
 import { useState } from "react";
 
 export const links: LinksFunction = () => {
@@ -26,11 +27,15 @@ export const links: LinksFunction = () => {
     },
     {
       rel: "stylesheet",
-      href: stylesUrl,
+      href: mapStylesUrl,
     },
     {
       rel: "stylesheet",
       href: navbarStylesUrl,
+    },
+    {
+      rel: "stylesheet",
+      href: stylesUrl,
     },
   ];
 };
@@ -46,7 +51,7 @@ export default function Map() {
         <Outlet context={coords} />
         <Navbar></Navbar>
         <ClientOnly fallback={<p>Loading...</p>}>
-          <MyMap data={data} setCoords={setCoords}/>
+          <MyMap data={data} setCoords={setCoords} />
         </ClientOnly>
       </div>
     </>

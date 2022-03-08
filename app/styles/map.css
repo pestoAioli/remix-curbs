@@ -14,3 +14,67 @@
   line-height: 0px;
   margin-top: 3vh;
 }
+
+.leaflet-container {
+  z-index: 0;
+  width: 90vw;
+  height: 80vh;
+  margin-left: 70px;
+  margin-right: 50px;
+  margin-top: 0px;
+  border: solid black 2px;
+  border-radius: 6px;
+}
+
+
+a.leaflet-bar-part{
+  position: absolute;
+  z-index: 1000000000;
+  
+}
+a.reset{
+  position: relative;
+  margin-left: 150px;
+}
+
+input.glass{
+  position: absolute;
+  z-index: 100000000;
+}
+@media screen and (max-width: 900px) {
+  .leaflet-container {
+    width: 96vw;
+    height: 85vh;
+    margin-left: 6px;
+  }
+}
+
+@media screen and (max-width: 600px){
+  input.glass{
+    width: 120px;
+  }
+  a.reset{
+    margin-left: 130px;
+  }
+}
+div.results{
+  margin-top: 5px;
+}
+
+.leaflet-control-container{
+  display: flex;
+  flex-direction: column-reverse;
+}
+a.leaflet-bar-part.leaflet-bar-part-single{
+  align-self: flex-end;
+  display: none;
+}
+form.open{
+  background-color: #f2d35564;
+  cursor: pointer;
+  border: solid #241e04 1px;
+}
+
+.geosearch.leaflet-bar.leaflet-control.leaflet-control-geosearch.leaflet-geosearch-button{
+border: none;
+}
