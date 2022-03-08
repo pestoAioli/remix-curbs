@@ -9,23 +9,6 @@ body{
   animation: gradient 15s ease infinite;
 }
 
-.enter {
-  display: flex;
-  padding: 20px;
-  border: 1px solid #000000;
-  box-sizing: border-box;
-  border-radius: 5px;
-  height: 25px;
-  left: 17px;
-  right: 16px;
-  font-family: Wingdings;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 28px;
-  line-height: 0px;
-  margin-top: 3vh;
-}
-
 .leaflet-container {
   z-index: 0;
   width: 90vw;

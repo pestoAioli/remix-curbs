@@ -2,7 +2,6 @@ import type { LinksFunction } from "remix";
 import { Link } from "remix";
 import stylesUrl from "~/styles/index.css";
 import logo from "../PastedGraphic.png";
-import backGround from "../gonzy.jpeg";
 
 export const links: LinksFunction = () => {
   return [

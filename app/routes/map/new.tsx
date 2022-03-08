@@ -13,7 +13,6 @@ import modalStylesUrl from "app/styles/modal.css";
 import { LinksFunction } from "@remix-run/react/routeModules";
 import { useForm } from "react-hook-form";
 import { uploadImage } from "~/utils/utils.server";
-import type { Stream } from "stream";
 
 export const links: LinksFunction = () => {
   return [
@@ -24,15 +23,12 @@ export const links: LinksFunction = () => {
     },
   ];
 };
-// interface uploadedImage {
-//   fileStream: Stream
-// }
-export const action: ActionFunction = async ({ request }) => {
 
+export const action: ActionFunction = async ({ request }) => {
   const uploadHandler: UploadHandler = async ({ stream }) => {
     const uploadedImage: any = await uploadImage(stream);
     return uploadedImage.secure_url;
-    }
+  };
 
   const form = await unstable_parseMultipartFormData(request, uploadHandler);
   const name = form.get("name");
@@ -40,10 +36,7 @@ export const action: ActionFunction = async ({ request }) => {
   const image_path = form.get("image_path").toString();
   const lat = form.get("lat").toString();
   const lon = form.get("lng").toString();
-  if (
-    typeof name !== "string" ||
-    typeof description !== "string"
-  ) {
+  if (typeof name !== "string" || typeof description !== "string") {
     throw new Error(`Form not submitted correctly.`);
   }
   const fields = { name, description, image_path, lat, lon };
@@ -73,19 +66,31 @@ export default function NewSpotRoute({ request }) {
           <form method="post" className="form" encType="multipart/form-data">
             <div className="input">
               <label>
-              <input type="text" name="name" placeholder="Name for the spot" />
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="Name for the spot"
+                />
               </label>
             </div>
             <div className="input">
               <label>
-                <input type="text" name="description" placeholder="Description"/>
+                <input
+                  type="text"
+                  name="description"
+                  placeholder="Description"
+                />
               </label>
             </div>
-            <div className="input">
-              <label>
-                 <input type="file" name="image_path" className="file"/>
-              </label>
-              </div>
+              <button className="button">
+                Upload pic
+                <input
+                  type="file"
+                  name="image_path"
+                  id="files"
+                  style={{ visibility: "hidden"}}
+                />
+              </button>
             <div className="input">
               <label>
                 <input
@@ -110,7 +115,7 @@ export default function NewSpotRoute({ request }) {
               <button type="submit" className="button">
                 Add
               </button>
-              <button className="button" >
+              <button className="button">
                 <Link to="/map">Go back </Link>
               </button>
             </div>
@@ -120,4 +125,3 @@ export default function NewSpotRoute({ request }) {
     </DialogOverlay>
   );
 }
-

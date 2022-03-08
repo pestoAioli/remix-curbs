@@ -52,6 +52,7 @@ body{
   border: 1px solid #fffefe;
   box-sizing: border-box;
   border-radius: 5px;
+  box-shadow: 0 0.2rem 0.2rem 0.2rem #00000071;
   height: 25px;
   left: 17px;
   right: 16px;
@@ -71,10 +72,10 @@ body{
   animation: gradient 5s ease infinite;
 }
 .enter:hover{
- transform: scale(1.1);
+ transform: scale(0.9);
 }
 .how-to:hover{
-transform: scale(1.1);
+transform: scale(0.9);
 }
 img.logo{
   border: none;
@@ -97,6 +98,7 @@ img.logo{
   font-family: Helvetica, sans-serif;
   border: solid whitesmoke;
   border-radius: 6px;
+  box-shadow: 0 0.2rem 0.2rem 0.2rem #00000071;
   background-image: linear-gradient(
     -45deg,
     #ADF7B681 20%,
@@ -106,7 +108,26 @@ img.logo{
   background-size: 200% 200%;
   animation: gradient 10s ease infinite;
 }
-
+.about{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  width: 50vw;
+  font-family: Helvetica, sans-serif;
+  border: solid whitesmoke;
+  border-radius: 6px;
+  background-image: linear-gradient(
+    -45deg,
+    #ADF7B6 20%,
+    #FFEE93 35%,
+    #FFC09F 50%,
+    #f72525 100%
+  );
+  background-size: 200% 200%;
+  animation: gradient 10s ease infinite;
+}
 @keyframes gradient {
 	0% {
 		background-position: 0% 50%;

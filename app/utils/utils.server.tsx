@@ -23,6 +23,4 @@ async function uploadImage(fileStream: Stream) {
     fileStream.pipe(uploadStream);
   });
 }
-
-console.log("configs", cloudinary.v2.config());
 export { uploadImage };

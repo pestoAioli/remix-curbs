@@ -56,8 +56,10 @@ input[type=text] {
 
 .button {
   padding: 10px 10px;
+  max-height: 40px;
   box-sizing: border-box;
   width: 100px;
+  box-shadow: 0 0.2rem 0.2rem #00000071;
   background-image: linear-gradient(-45deg,
   #ADF7B6 20%,
   #FFEE93 35%,
@@ -68,7 +70,7 @@ input[type=text] {
 }
 
 .button:hover{
- scale: 1.1;
+ transform: scale(0.9);
  cursor: pointer;
 
 }
