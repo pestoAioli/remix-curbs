@@ -63,14 +63,19 @@ export default function NewSpotRoute({ request }) {
           <form method="post" className="form">
             <div className="input">
               <label>
-                Name: <input type="text" name="name" />
+              <input type="text" name="name" placeholder="Name for the spot" />
               </label>
             </div>
             <div className="input">
               <label>
-                Description: <input type="text" name="description" />
+                <input type="text" name="description" placeholder="Description"/>
               </label>
             </div>
+            <div className="input">
+              <label>
+                 <input type="file" name="image_path" className="file"/>
+              </label>
+              </div>
             <div className="input">
               <label>
                 <input
@@ -95,7 +100,7 @@ export default function NewSpotRoute({ request }) {
               <button type="submit" className="button">
                 Add
               </button>
-              <button>
+              <button className="button" >
                 <Link to="/map">Go back </Link>
               </button>
             </div>

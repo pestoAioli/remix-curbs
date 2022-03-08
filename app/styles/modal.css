@@ -1,28 +1,32 @@
 .modal {
   width: 20vw;
   margin-left: 55vw;
-  background: none;
+  background: transparent;
   overflow: hidden;
 }
 
-@media screen and (max-width: 1200px){
+@media screen and (max-width: 1200px) {
   .modal {
     width: 100vw;
     margin-left: 5vw;
     background: none;
   }
 }
+
 .dialog-text {
   display: flex;
   max-width: 40vw;
   height: 45vh;
   margin-top: 20vh;
   border-radius: 12px;
+  background: transparent;
   background-image: radial-gradient(circle,
-      #ADF7B6 10%,
-      #FFEE93 35%,
-      #FFC09F 100%);
-overflow: hidden;
+      #ADF7B681 20%,
+      #FFEE9381 35%,
+      #ff9f9f81 60%);
+  background-size: 200% 200%;
+  animation: gradient 10s ease infinite;
+  overflow: hidden;
 }
 
 .form-box {
@@ -38,3 +42,33 @@ overflow: hidden;
   gap: 1vh;
 }
 
+.input {
+  padding: 10px 0px;
+}
+
+input[type=text] {
+  padding: 10px;
+  box-sizing: border-box;
+  margin-left: 0px;
+  border-radius: 6px;
+  width: 180px;
+}
+
+.button {
+  padding: 10px 10px;
+  box-sizing: border-box;
+  width: 100px;
+  background: transparent;
+  border-radius: 6px;
+}
+
+.button:hover{
+ scale: 1.1;
+ cursor: pointer;
+ background-image: radial-gradient(circle,
+ #ADF7B6 20%,
+ #FFEE93 35%,
+ #ff9f9f 60%);
+background-size: 200% 200%;
+animation: gradient 10s ease infinite;
+}
