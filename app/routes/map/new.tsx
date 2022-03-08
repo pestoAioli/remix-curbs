@@ -1,12 +1,10 @@
 import {
   ActionFunction,
-  ErrorBoundaryComponent,
+  UploadHandler,
+  unstable_parseMultipartFormData,
   Link,
-  Links,
-  Scripts,
   redirect,
   useOutletContext,
-  Outlet,
 } from "remix";
 import { DialogOverlay, DialogContent } from "@reach/dialog";
 import { db } from "~/utils/db.server";
@@ -14,6 +12,9 @@ import dialogStylesUrl from "@reach/dialog/styles.css";
 import modalStylesUrl from "app/styles/modal.css";
 import { LinksFunction } from "@remix-run/react/routeModules";
 import { useForm } from "react-hook-form";
+import { uploadImage } from "~/utils/utils.server";
+import type { Stream } from "stream";
+
 export const links: LinksFunction = () => {
   return [
     { rel: "stylesheet", href: dialogStylesUrl },
@@ -23,11 +24,20 @@ export const links: LinksFunction = () => {
     },
   ];
 };
-
+// interface uploadedImage {
+//   fileStream: Stream
+// }
 export const action: ActionFunction = async ({ request }) => {
-  const form = await request.formData();
+
+  const uploadHandler: UploadHandler = async ({ stream }) => {
+    const uploadedImage: any = await uploadImage(stream);
+    return uploadedImage.secure_url;
+    }
+
+  const form = await unstable_parseMultipartFormData(request, uploadHandler);
   const name = form.get("name");
   const description = form.get("description");
+  const image_path = form.get("image_path").toString();
   const lat = form.get("lat").toString();
   const lon = form.get("lng").toString();
   if (
@@ -36,7 +46,7 @@ export const action: ActionFunction = async ({ request }) => {
   ) {
     throw new Error(`Form not submitted correctly.`);
   }
-  const fields = { name, description, lat, lon };
+  const fields = { name, description, image_path, lat, lon };
 
   const spot = await db.curbs.create({ data: fields });
 
@@ -60,7 +70,7 @@ export default function NewSpotRoute({ request }) {
     <DialogOverlay className="modal" isOpen={true} dangerouslyBypassFocusLock>
       <DialogContent className="dialog-text" aria-label="Submit Form">
         <div className="form-box">
-          <form method="post" className="form">
+          <form method="post" className="form" encType="multipart/form-data">
             <div className="input">
               <label>
               <input type="text" name="name" placeholder="Name for the spot" />
