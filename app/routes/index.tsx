@@ -1,7 +1,6 @@
 import type { LinksFunction } from "remix";
 import { Link } from "remix";
 import stylesUrl from "~/styles/index.css";
-import logo from "../PastedGraphic.png";
 
 export const links: LinksFunction = () => {
   return [
@@ -19,7 +18,7 @@ export default function IndexRoute() {
         <div>
           <Link to={"about"}>
             <div>
-              <img src={logo} alt="" className="logo" />
+              <img src="/PastedGraphic.png" alt="" className="logo" />
             </div>
           </Link>
         </div>
@@ -38,8 +37,7 @@ export default function IndexRoute() {
         </div>
         <div>
           <button className="enter">
-            <Link to="map">
-              Find skate spots near me</Link>
+            <Link to="map">Find skate spots near me</Link>
           </button>
         </div>
       </div>

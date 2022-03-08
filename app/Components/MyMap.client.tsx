@@ -3,16 +3,14 @@ import {
   TileLayer,
   Marker,
   Popup,
-  useMapEvents,
-  useMap,
+  useMapEvents
 } from "react-leaflet";
 import type { LinksFunction } from "@remix-run/react/routeModules";
 import mapStylesUrl from "app/styles/map.css";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link } from "remix";
-import L, { icon } from "leaflet";
+import L from "leaflet";
 import { SearchControl, OpenStreetMapProvider } from "leaflet-geosearch";
-import "leaflet/dist/leaflet.css";
 export const links: LinksFunction = () => {
   return [
     { rel: "stylesheet", href: mapStylesUrl },
@@ -84,7 +82,7 @@ export default function MyMap({ data, setCoords }) {
         return null;
       }}
     >
-      <TileLayer url="https://{s}.tile.thunderforest.com/landscape/{z}/{x}/{y}.png?apikey=01aeaf06bca449cf9887843c3c62492e" />
+      <TileLayer url="https://{s}.tile.thunderforest.com/landscape/{z}/{x}/{y}.png?apikey=01aeaf06bca449cf9887843c3c62492e"/>
       <LocationMarkers setCoords={setCoords}></LocationMarkers>
       {data.map((coords) => (
         <Marker position={[coords.lat, coords.lon]} key={coords.id}>

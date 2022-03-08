@@ -2,7 +2,6 @@
 .curbs {
   display: flex;
   justify-content: space-around;
-  font-family: Wingdings;
   width: 100vw;
 }
 

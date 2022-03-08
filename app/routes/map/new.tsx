@@ -82,15 +82,12 @@ export default function NewSpotRoute({ request }) {
                 />
               </label>
             </div>
-              <button className="button">
-                Upload pic
-                <input
-                  type="file"
-                  name="image_path"
-                  id="files"
-                  style={{ visibility: "hidden"}}
-                />
-              </button>
+            <div>
+              <div></div>
+              <label>
+                <input type="file" name="image_path" className="button" />
+              </label>
+            </div>
             <div className="input">
               <label>
                 <input
