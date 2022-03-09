@@ -128,6 +128,7 @@ img.logo{
   background-size: 200% 200%;
   animation: gradient 10s ease infinite;
 }
+
 @keyframes gradient {
 	0% {
 		background-position: 0% 50%;

@@ -3,12 +3,7 @@ import { Link } from "remix";
 import stylesUrl from "~/styles/index.css";
 
 export const links: LinksFunction = () => {
-  return [
-    {
-      rel: "stylesheet",
-      href: stylesUrl,
-    },
-  ];
+  return [{ rel: "stylesheet", href: stylesUrl }];
 };
 
 export default function IndexRoute() {

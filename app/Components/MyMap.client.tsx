@@ -86,7 +86,7 @@ export default function MyMap({ data, setCoords }) {
       <LocationMarkers setCoords={setCoords}></LocationMarkers>
       {data.map((coords) => (
         <Marker position={[coords.lat, coords.lon]} key={coords.id}>
-          <Popup maxHeight={500}>
+          <Popup maxHeight={500} maxWidth={300}>
             <h1>{coords.name}</h1>
             <h3>{coords.description}</h3>
             <h2>
@@ -97,7 +97,7 @@ export default function MyMap({ data, setCoords }) {
               </a>
             </h2>
             <img
-              style={{ maxWidth: "50vw", overflow: "hidden" }}
+              style={{ maxWidth: "300px", overflow: "hidden" }}
               src={`${coords.image_path}`}
               alt=""
             />
