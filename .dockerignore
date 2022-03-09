@@ -3,3 +3,5 @@ build
 .cache
 .git
 .env
+public/build
+server/build

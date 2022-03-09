@@ -57,4 +57,4 @@ COPY --from=build /app/build /app/build
 COPY --from=build /app/public /app/public
 ADD . .
 
-CMD ["start_with_migrations.sh"]
+CMD ["npm", "run", "start"]
