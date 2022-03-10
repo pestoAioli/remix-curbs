@@ -82,7 +82,7 @@ export default function MyMap({ data, setCoords }) {
         return null;
       }}
     >
-      <TileLayer url="https://{s}.tile.thunderforest.com/landscape/{z}/{x}/{y}.png?apikey=01aeaf06bca449cf9887843c3c62492e"/>
+      <TileLayer url="https://{s}.tile.thunderforest.com/transport/{z}/{x}/{y}.png?apikey=01aeaf06bca449cf9887843c3c62492e"/>
       <LocationMarkers setCoords={setCoords}></LocationMarkers>
       {data.map((coords) => (
         <Marker position={[coords.lat, coords.lon]} key={coords.id}>

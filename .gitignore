@@ -4,3 +4,6 @@ node_modules
 /server/build
 /public/build
 .env
+
+
+app/ClientSecrets.client.tsx
