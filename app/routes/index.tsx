@@ -13,7 +13,7 @@ export default function IndexRoute() {
         <div>
           <Link to={"about"}>
             <div>
-              <img src="/PastedGraphic.png" alt="" className="logo" />
+              <img src="/kurby.png" alt="" className="logo" />
             </div>
           </Link>
         </div>

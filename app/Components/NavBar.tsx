@@ -4,7 +4,7 @@ export default function Navbar() {
     <div className="nav-bar">
       <div className="curbs">
         <Link to="/">
-        <img src="/PastedGraphic.png" alt="" className="logo-two" />
+        <img src="/kurby.png" alt="" className="logo-two" />
         </Link>
       </div>
     </div>
