@@ -10,6 +10,9 @@ Curbs is fully deployed on fly.io and you can check out (or use) the app here: h
 ## Development
 
 I created this app using Remix, a full-stack, SSR framework for React, and plain css for styling(with some help from Reach UI).I used Postgres as my database with Prisma as my ORM of choice. For the mapping functionality I used the Leaflet API. 
+## Getting Started 
+
+To run the project on your machine, npm install from the root of the project and type npm run dev to start the project in your localhost.
 
 ## Here are some screenshots of the app:
 <p float="left">
