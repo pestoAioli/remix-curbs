@@ -1,5 +1,16 @@
-import { Links, LiveReload, Outlet, Scripts, ScrollRestoration, ErrorBoundaryComponent } from "remix";
-import MyMap from "./Components/MyMap.client";
+import {
+  Links,
+  LiveReload,
+  Outlet,
+  Scripts,
+  ScrollRestoration,
+  ErrorBoundaryComponent,
+  LinksFunction,
+} from "remix";
+import stylesUrl from "~/styles/index.css";
+export const links: LinksFunction = () => {
+  return [{ rel: "stylesheet", href: stylesUrl }];
+};
 
 function Document({
   children,
@@ -44,13 +55,15 @@ export const ErrorBoundary: ErrorBoundaryComponent = ({ error }) => {
       </head>
       <body>
         <div className="error">
-      <h1> Woopsie!!!! apparently, whatever you just tried to do, is not okay ;-( Please go back or refresh the page </h1>
-       <h2>For developers sake: {error.message} </h2>
+          <h1>
+            {" "}
+            Woopsie!!!! apparently, whatever you just tried to do, is not okay
+            ;-( Please go back or refresh the page{" "}
+          </h1>
+          <h2>For developers sake: {error.message} </h2>
         </div>
         <Scripts />
       </body>
     </html>
   );
-  
-  
 };
