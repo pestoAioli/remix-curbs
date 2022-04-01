@@ -1,5 +1,5 @@
 # Curbs!
-A fullstack React spplication made by Ricardo Miguel Rivera-Chavez
+A fullstack React application made by Ricardo Miguel Rivera-Chavez
 
 ## About this app
 
